@@ -11,7 +11,7 @@ export const initialState = [
         id: 2,
         imageURL: 'https://static.nike.com/a/images/q_auto:eco/t_product_v1/f_auto/dpr_1.0/h_324,c_limit/a8254cc4-b776-47b2-898f-7e6e1f564c94/%E0%B8%A3%E0%B8%AD%E0%B8%87%E0%B9%80%E0%B8%97%E0%B9%89%E0%B8%B2%E0%B8%9C%E0%B8%B9%E0%B9%89-air-force-1-07-RgcF1Q.png',
         name: 'Nike Air Force 1 07',
-        category: 'Shoes',
+        category: 'Category 2',
         price: 150,
         quantity: 5
     },
