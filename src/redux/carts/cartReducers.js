@@ -6,19 +6,22 @@ import {
 } from "./actionTypes";
 import { initialState } from "./initialState";
 
-const nextId = (items) => {
-  return items.reduce((id, item) => Math.max(id, item.id), -1) + 1;
+const nextId = (state) => {
+  return state.reduce((id, state) => Math.max(id, state.id), -1) + 1;
 };
 
-const findProductInCart = (items, action) => {
-  return items.find((p) => p.productId === action.payload.id);
+const findProductInCart = (state, action) => {
+  return state.find((p) => p.productId === action.payload.id);
 };
 
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TO_CART:
       const product = findProductInCart(state, action);
+      console.log(product);
       if (product) {
+        console.log("Found");
+        console.log(product);
         return state.map((p) => {
           if (p.productId === product.productId) {
             return {
@@ -47,51 +50,26 @@ const cartReducer = (state = initialState, action) => {
         if (product.id === action.payload) {
           return {
             ...product,
-            quantity: product.quantity - 1,
+            quantity: product.quantity + 1,
           };
         } else {
           return product;
         }
       });
     case DECREASE_QUANTITY:
+      return state.map((product) => {
+        if (product.id === action.payload) {
+          return {
+            ...product,
+            quantity: product.quantity - 1,
+          };
+        } else {
+          return product;
+        }
+      });
     default:
       return state;
   }
 };
-//       return [
-//         ...state,
-//         {
-//           id: nextId(state),
-//           ...action.payload,
-//           price: parseFloat(action.payload.price),
-//           quantity: parseInt(action.payload.quantity),
-//         },
-//       ];
-//     case ADD_QUANTITY:
-//       return state.map((product) => {
-//         if (product.id === action.payload.productId) {
-//           return {
-//             ...product,
-//             quantity: product.quantity + action.payload.quantity,
-//           };
-//         } else {
-//           return product;
-//         }
-//       });
-//     case REMOVE_QUANTITY:
-//       return state.map((product) => {
-//         if (product.id === action.payload) {
-//           return {
-//             ...product,
-//             quantity: product.quantity - 1,
-//           };
-//         } else {
-//           return state;
-//         }
-//       });
-//     default:
-//       return state;
-//   }
-// };
 
 export default cartReducer;

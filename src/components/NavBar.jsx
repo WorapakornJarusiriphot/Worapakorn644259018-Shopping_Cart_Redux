@@ -1,13 +1,20 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 const NavBar = () => {
+    //subscribe to carts in store
     const carts = useSelector((state) => state.carts);
-    console.log(carts);
+
+    //compute number of items
     const cartItemNo = carts.reduce(
-        (total, product) => total + product.quantity,0
+        (total, product) => total + product.quantity,
+        0
     );
-    
+
+    const dispatch = useDispatch();
+    const handlePageChange = (type) => {
+        dispatch({ type });
+    };
     return (
         <nav className="bg-indigo-900 text-white">
             <div className="navbar max-w-7xl mx-auto">
@@ -18,13 +25,14 @@ const NavBar = () => {
                 </div>
                 <div className="flex-none space-x-4">
                     <div className="dropdown dropdown-end font-semibold">
-                        <button>Home</button>
+                        <button onClick={() => handlePageChange("HOME")}>Home</button>
                     </div>
                     <div className="dropdown dropdown-end">
                         <div
                             tabIndex={0}
                             role="button"
                             className="btn btn-ghost btn-circle"
+                            onClick={() => handlePageChange("CART")}
                         >
                             <div className="indicator">
                                 <svg
@@ -41,7 +49,9 @@ const NavBar = () => {
                                         d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                                     />
                                 </svg>
-                                <span className="badge badge-sm indicator-item">{cartItemNo}</span>
+                                <span className="badge badge-sm indicator-item">
+                                    {cartItemNo}
+                                </span>
                             </div>
                         </div>
                     </div>

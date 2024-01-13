@@ -1,7 +1,7 @@
 import React from "react";
-import AddProduct from "./AddProduct";
+import AddProduct from "../components/AddProduct";
 import { useSelector } from "react-redux";
-import ProductItem from "./ProductItem";
+import ProductItem from "../components/ProductItem";
 
 const Home = () => {
     const products = useSelector((state) => state.products);
@@ -15,7 +15,8 @@ const Home = () => {
                             {products.length ? (
                                 products.map((p, i) => {
                                     return <ProductItem product={p} key={i} />;
-                                })) : (
+                                })
+                            ) : (
                                 <div>No Product Found</div>
                             )}
                         </div>

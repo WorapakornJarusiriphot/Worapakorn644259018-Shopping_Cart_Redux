@@ -39,6 +39,7 @@ const AddProduct = () => {
                         {...register("category", { required: true })}
                     >
                         <option value="">Select a category</option>
+                        <option value="shoes">Shoes</option>
                         <option value="clothing">Clothing</option>
                         <option value="gadgets">Gadgets</option>
                         <option value="bags">Bags</option>

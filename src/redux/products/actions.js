@@ -25,6 +25,7 @@ export const removeQuantity = (productId) => {
     payload: productId,
   };
 };
+
 export const filterByCategory = (filter) => {
   return {
     type: FILTER_BY_CATEGORY,
